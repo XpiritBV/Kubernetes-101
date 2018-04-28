@@ -19,10 +19,16 @@ Make sure you select the right Azure subscription, you can change it by running:
 az account set --subscription <subscription-id>
 ```
 
-Once you have selected the right subscribtion run the command below to create your k8s cluster in Azure Container Service (ACS):
+Once you have selected the right subscribtion run the command below to create a new resoucre group for our cluster:
+```
+az group create --name "introduction-to-k8s" --location "westeurope"
+```
+
+Next run the following commadn to create a k8s cluster in Azure Container Service (ACS):
 ```
 az acs create --orchestrator-type kubernetes --name k8scluster --resource-group introduction-to-k8s --agent-count 3 --generate-ssh-keys
 ```
+
 It will take a few minutes for this command to complete because it has to setup an entire cluster for you. Once it is done you will have a Kubernetes cluster named **k8scluster** (*--name k8scluster*) inside a resource group named **introduction-to-k8s** (*--resource-group introduction-to-k8s*) with 1 master and **3 nodes** (*--agent-count 3*). The **SSH keys required to connect to the cluster** have been generated automatically (*--generate-ssh-keys*).
 
 Next we will download an install kubectl. First check if you don't have it already by running:
