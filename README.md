@@ -4,7 +4,46 @@ This example is **not** final yet!
 # 1. Create a cluster
 To get started you will need to setup a Kubernetes cluster. In this example we will use Azure Container Service (ACS).
 
-Follow [these steps](https://pascalnaber.wordpress.com/2017/09/12/run-net-core-2-docker-images-in-kubernetes-using-azure-container-service-and-azure-container-registry/) from [Pascal Naber's blog](https://pascalnaber.wordpress.com/) to setup a cluster. Note that you do not have to create a Azure Container Registry (ACR) because this example will use images that are publicly available from [Docker Hub ](https://hub.docker.com/). You can create an ACR if you want to use your own images.
+Open a command prompt and run:
+```
+az login
+```
+
+Next run:
+```
+az account list
+```
+
+Make sure you select the right Azure subscription, you can change it by running:
+```
+az account set --subscription <subscription-id>
+```
+
+Once you have selected the right subscribtion run the command below to create your k8s cluster in Azure Container Service (ACS):
+```
+az acs create --orchestrator-type kubernetes --name k8scluster --resource-group introduction-to-k8s --agent-count 3 --generate-ssh-keys
+```
+It will take a few minutes for this command to complete because it has to setup an entire cluster for you. Once it is done you will have a Kubernetes cluster named **k8scluster** (*--name k8scluster*) inside a resource group named **introduction-to-k8s** (*--resource-group introduction-to-k8s*) with 1 master and **3 nodes** (*--agent-count 3*). The **SSH keys required to connect to the cluster** have been generated automatically (*--generate-ssh-keys*).
+
+Next we will download an install kubectl. First check if you don't have it already by running:
+```
+kubectl
+```
+
+If ```kubectl``` is not found, run:
+```
+az acs kubernetes install-cli
+```
+
+Next we need connect to the cluster by running:
+```
+az acs kubernetes get-credentials --name k8scluster --resource-group introduction-to-k8s
+```
+
+Lastly verify we have a connection by running:
+```
+kubectl get nodes
+```
 
 # 2. Setup ingress routing
 First we will have to deploy an ingress controller. There are different ingress controllers available but we will use the [NGINX ingress controller](https://github.com/kubernetes/ingress-nginx) which uses NGINX as a reverse proxy to route traffic to the right services. 
