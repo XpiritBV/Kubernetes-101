@@ -50,6 +50,12 @@ Lastly verify we have a connection by running:
 ```
 kubectl get nodes
 ```
+We will ```kubectl``` to further interact with our Kubernetes cluster. But there is also a Web UI or dashboard available. To be able to view this dashboard we need to run ```kubectl proxy``` which will block ```kubectl``` from accepting any further command while making our cluster available on ```localhost``` and proxying requests into our cluster. For conveince open a second command prompt and run the following commands to open the proxy while still being able to run ```kubectl``` commands from your current command prompt:
+1. ```az login```
+2. ```az account list```
+3. ```az account set --subscription <subscription-id>```
+4. ```az acs kubernetes get-credentials --name k8scluster --resource-group introduction-to-k8s```
+5. ```kubectl proxy```
 
 # 2. Setup ingress routing
 First we will have to deploy an ingress controller. There are different ingress controllers available but we will use the [NGINX ingress controller](https://github.com/kubernetes/ingress-nginx) which uses NGINX as a reverse proxy to route traffic to the right services. 
