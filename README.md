@@ -15,13 +15,17 @@ kubectl apply -f .\ingress-controller\ingress-controller.deployment.yml
 ```
 
 Then the command below to deploy the service required for our ingress controller. This service is of the type LoadBalancer and will have a public IP.
-```kubectl apply -f .\ingress-controller\ingress-controller.service.yml```
+```
+kubectl apply -f .\ingress-controller\ingress-controller.service.yml
+```
 
 # 3. Deploy "myapp"
 Next we will have to deploy our app to our cluster. We will use the [Kubernetes Up And Running Demo (KUARD)](https://github.com/kubernetes-up-and-running/kuard) image for this. This is a readily available image that will show information about our cluster, about the node on the pod is running and about the pod itself. 
 
 Run the command below to deploy 3 replicas of "myapp" into our cluster.
-```kubectl apply -f .\ingress-controller\myapp.deployment.yml```
+```
+kubectl apply -f .\ingress-controller\myapp.deployment.yml
+```
 
 Next run the command below to deploy the "myappservice". This service is of the type NodePort and will not have a public IP.
 ```
