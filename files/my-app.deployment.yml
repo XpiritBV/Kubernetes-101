@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    k8s-app: myapp
+  namespace: default
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        k8s-app: myapp
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:1
+        name: myapp
+        ports:
+        - containerPort: 8080
+          hostPort: 80
