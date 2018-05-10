@@ -55,6 +55,8 @@ We will ```kubectl``` to further interact with our Kubernetes cluster. But there
 4. ```az acs kubernetes get-credentials --name k8scluster --resource-group introduction-to-k8s```
 5. ```kubectl proxy```
 
+You can now navigate to [your dashboard](http://localhost:8001/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard/#!/cluster?namespace=default). Explore your cluster by clicking on the different links on the left sides such as node, pods, ingress. You can use this dashboard throughout this walkthrough to see what the commands you run change in your cluster.
+
 # 2. Setup ingress routing
 First we will have to deploy an ingress controller. There are different ingress controllers available but we will use the [NGINX ingress controller](https://github.com/kubernetes/ingress-nginx) which uses NGINX as a reverse proxy to route traffic to the right services. 
 
