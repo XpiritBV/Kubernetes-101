@@ -81,7 +81,7 @@ kubectl apply -f .\files\ingress-controller.service.yml
 ```
 
 # 3. Deploy "myapp"
-Next we will have to deploy our app to our cluster. We will use the [Kubernetes Up And Running Demo (KUARD)](https://github.com/kubernetes-up-and-running/kuard) image for this. This is a readily available image that will show information about our cluster, about the node on the pod is running and about the pod itself. 
+Next we will have to deploy our app to our cluster. We will use the [tutum/hello-world](https://hub.docker.com/r/tutum/hello-world/) image for this. This is a readily available image that serves a web page on port 80 that shows the hostname of the pod.  
 
 Run the command below to deploy 3 replicas of "myapp" into our cluster.
 ```
@@ -106,7 +106,7 @@ kubectl get service
 ```
 
 The result should be like this:
-![kubectl get service](images/kubectl-get-service.png)
+![](images/kubectl-get-service.png)
 
 Navigate to ```http://<EXTERNAL-IP>/myapp``` and you should see something like this:
 ![](images/myapp-1.png)
