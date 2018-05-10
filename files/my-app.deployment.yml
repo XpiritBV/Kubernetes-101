@@ -13,8 +13,7 @@ spec:
         k8s-app: myapp
     spec:
       containers:
-      - image: gcr.io/kuar-demo/kuard-amd64:1
+      - image: tutum/hello-world
         name: myapp
         ports:
-        - containerPort: 8080
-          hostPort: 80
+        - containerPort: 80
