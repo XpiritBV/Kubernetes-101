@@ -136,7 +136,7 @@ You should see something like this: ![](images/kubectl-get-pod.png)
 
 In our case 2 replicas are running on ```k8s-agent-9b0ce916-2``` so we are going to kill that node by running:
 ```
- az vm stop --resource-group introduction-to-k8s --name k8s-agent-9b0ce916-2 --no-wait
+ az vm deallocate --resource-group introduction-to-k8s --name k8s-agent-9b0ce916-2 --no-wait
 ```
 Now run the following command and wait until you see the pods have moved to a new node. It might take a few minutes for the vm to shutdown.
 ```
