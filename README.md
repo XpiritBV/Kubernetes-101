@@ -1,6 +1,4 @@
 
-# [WORK IN PROGRESS]
-This example is **not** final yet!
 # 1. Create a cluster
 To get started you will need to setup a Kubernetes cluster. In this example we will use Azure Container Service (ACS).
 
