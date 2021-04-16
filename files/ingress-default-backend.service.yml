@@ -4,10 +4,10 @@ metadata:
   name: default-http-backend
   namespace: default
   labels:
-    k8s-app: default-http-backend
+    app: default-http-backend
 spec:
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    k8s-app: default-http-backend
+    app: default-http-backend

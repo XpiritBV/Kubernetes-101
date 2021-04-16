@@ -1,17 +1,21 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myapp
   labels:
-    k8s-app: myapp
+    app: myapp
   namespace: default
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
   template:
     metadata:
       labels:
-        k8s-app: myapp
+        app: myapp
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
       - image: tutum/hello-world
         name: myapp

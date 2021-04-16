@@ -10,5 +10,5 @@ spec:
     - port: 443
       name: https
   selector:
-    k8s-app: nginx-ingress-controller
+    app: nginx-ingress-controller
   type: LoadBalancer

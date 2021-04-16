@@ -1,6 +1,17 @@
+# 1 Create a cluster
 
-# 1. Create a cluster
-To get started you will need to setup a Kubernetes cluster. In this example we will use Azure Container Service (ACS).
+You have 2 options to create a cluster: 
+1. `Docker Desktop` which includes a single node Kubernetes clusters called `mini-kube`
+2. Create an AKS cluster in Azure (this requires an Azure subscription)
+
+Though you can follow most steps using `Docker Desktop` you **cannot** simulate a node failure because `Docker Desktop` includes a **single** node cluster meaning there is no secondary node to take over the load.
+
+## 1. Install Docker Desktop 
+
+Follow the instruction on: https://docs.docker.com/docker-for-windows/wsl/ (or for Mac users: https://docs.docker.com/docker-for-mac/install/) and make sure you enable Kubernetes in the docker desktop settings afterwards.
+
+## 2. Create a cluster in Azure
+To get started you will need to setup a Kubernetes cluster. In this example we will use Azure Kubernetes Service (AKS).
 
 Open a command prompt and run:
 ```
@@ -80,17 +91,17 @@ Next we will have to deploy our app to our cluster. We will use the [tutum/hello
 
 Run the command below to deploy 3 replicas of "myapp" into our cluster.
 ```
-kubectl apply -f .\files\myapp.deployment.yml
+kubectl apply -f .\files\my-app.deployment.yml
 ```
 
 Next run the command below to deploy the "myappservice". This service is of the type NodePort and will not have a public IP.
 ```
-kubectl apply -f .\files\myapp.service.yml
+kubectl apply -f .\files\my-app.service.yml
 ```
 
 To make the "myappservice" reachable from outside our cluster we will deploy an Ingress resource for it. This Ingress will tell our Ingress controller how to route traffic from to one of the 3 replicas. Run the command below to deploy it. 
 ```
-kubectl apply -f .\files\myapp.ingress.yml
+kubectl apply -f .\files\my-app.ingress.yml
 ```
 
 The Ingress controller will automatically detect a change in the Ingress resources of our cluster and generate the required NGINX proxy configuration to route traffic to one of our myapp pods when someone connects to our cluster using ```http://<EXTERNAL-IP>/myapp```
@@ -114,7 +125,7 @@ Refresh the page again and you should see something like this:
 
 Note that you end up on a different instance each time you refresh. This is because the ```myappservice``` loadbalances the requests to the ```myapp``` pods. By default a ```service``` in kubernetes will load balance using round robin. There are 3 instances of the pod so everytime you refresh you will get the next available instance in the queue.
 
-# 4. Simulate node failure
+# 4. Simulate node failure (AKS only!)
 Next we are going to simulate that one of our nodes failes, we will see that Kubernetes will make sure that the desired state (3 replicas of the myapp pod) is satisfied as long as resources are available on the remaining nodes.
 
 First get a list of available nodes by running:
